@@ -11,7 +11,7 @@ function Login(props) {
     const handleChanges = e => {
           setLogin({
               ...login,
-              [e.target.username]: e.target.value
+              [e.target.name]: e.target.value
       })
     }  
 
@@ -21,7 +21,7 @@ function Login(props) {
         .post('/api/login', login)
         .then(response => {
             window.localStorage.setItem('token', response.data.payload)
-            // history.push('/protected')
+            props.history.push('/protected')
         })
         .catch(error => {
             console.log (error)
@@ -40,16 +40,18 @@ function Login(props) {
                 placeholder="username"
                 name="username"
                 onChange={handleChanges}
-                value={login.username}/>
+                value={props.username}/>
 
                 <input
-                type="text"
+                type="password"
                 placeholder="password"
                 name="password"
                 onChange={handleChanges}
-                value={login.password}/>
+                value={props.password}/>
+
+                <button type="submit">Login</button>
             </form>
-            <button type="submit">Login</button>
+            
         </div>
     )
 }

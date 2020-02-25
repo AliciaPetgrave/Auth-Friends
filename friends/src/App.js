@@ -1,12 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import {Link, Route, Switch} from 'react-router-dom'
 import Login from './components/Login'
+import {PrivateRoute} from './components/PrivateRoute'
+import FriendsList from './components/FriendsList'
 
 function App() {
-  
+
   return (
     <div className="App">
       <div className="header">
@@ -16,7 +17,10 @@ function App() {
           </li>
         </ul>
       </div>
+      <Switch>
+      <PrivateRoute exact path="/protected" component={FriendsList} />
       <Route path="/login" component={Login}/>
+      </Switch>
     </div>
   );
 }

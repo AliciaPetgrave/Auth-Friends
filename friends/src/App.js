@@ -20,6 +20,7 @@ function App() {
       <Switch>
       <PrivateRoute exact path="/protected" component={FriendsList} />
       <Route path="/login" component={Login}/>
+      <Route component={Login}/>
       </Switch>
     </div>
   );

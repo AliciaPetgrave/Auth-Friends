@@ -2,29 +2,48 @@ import React, {useState, useEffect} from 'react'
 import axiosWithAuth from '../utils/axiosWithAuth'
 
 function FriendsList() {
-    const [friends, setFriends] = useState({
-        id: '',
-        name:'',
-        age:'',
-        email:''
+    //friends array
+    const [friends, setFriends] = useState([])
+    //data for new friends
+    const [newFriends, setNewFriends] = useState({
+        id:'',
+        name: '',
+        age: '',
+        email: ''
     })
 
+    //handles form changes
     const handleChanges = e => {
-        setFriends({
-            ...friends,
+        setNewFriends({
+            ...newFriends,
             [e.target.name]: e.target.value
         })
     }
 
 
-const addFriend = e => {
+//displays current friends
+useEffect(() => {
     axiosWithAuth()
-    .get('/friends', friends)
+    .get('/api/friends', friends)
     .then(response => {
+        setFriends(response.data)
         console.log(response)
     })
     .catch(error => {
         console.log(error)
+    })
+},[])
+
+//adds new friends
+const addFriend = e => {
+    e.preventDefault()
+    axiosWithAuth()
+    .post('/api/friends', setNewFriends)
+    .then(response => {
+       console.log(response)
+    })
+    .catch(error => {
+        console.log (error)
     })
 }
 
@@ -37,6 +56,7 @@ const addFriend = e => {
                 placeholder="name"
                 name="name"
                 onChange={handleChanges}
+                value={newFriends.name}
                 />
 
                 <input
@@ -44,6 +64,7 @@ const addFriend = e => {
                 placeholder="age"
                 name="age"
                 onChange={handleChanges}
+                value={newFriends.age}
                 />
 
                 <input
@@ -51,17 +72,20 @@ const addFriend = e => {
                 placeholder="email"
                 name="email"
                 onChange={handleChanges}
+                value={newFriends.email}
                 />
                 <button type="submit">Add Friend</button>
             </form>
 
-        
+            <h2>Mis amigos</h2>
 
             <div>
                 {friends.map(friend => {
                     return (
                         <div>
-                            <h3>{friend.name}</h3>
+                            <p>{friend.name}</p>
+                            <p>{friend.age}</p>
+                            <p>{friend.email}</p>
                         </div>    
                     )
                 })}

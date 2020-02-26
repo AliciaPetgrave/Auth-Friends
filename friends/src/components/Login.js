@@ -40,14 +40,14 @@ function Login(props) {
                 placeholder="username"
                 name="username"
                 onChange={handleChanges}
-                value={props.username}/>
+                value={login.username}/>
 
                 <input
                 type="password"
                 placeholder="password"
                 name="password"
                 onChange={handleChanges}
-                value={props.password}/>
+                value={login.password}/>
 
                 <button type="submit">Login</button>
             </form>

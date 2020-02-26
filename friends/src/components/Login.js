@@ -35,7 +35,9 @@ function Login(props) {
 
     return (
         <div>
-            <form onSubmit={submitLogin}>
+            
+            <form className="login-form" onSubmit={submitLogin}>
+            <h2>Login</h2>
                 <input
                 type="text"
                 placeholder="username"

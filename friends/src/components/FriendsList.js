@@ -59,7 +59,7 @@ const addFriend = e => {
     
     return (
         <div>
-            <form onSubmit={addFriend}>
+            <form className="friends-form" onSubmit={addFriend}>
                 <input
                 type="text"
                 placeholder="name"
@@ -86,15 +86,15 @@ const addFriend = e => {
                 <button type="submit">Add Friend</button>
             </form>
 
-            <h2>Mis amigos</h2>
+            <h2>Mis Amigos</h2>
 
             <div className="friends-div">
                 {friends.map(friend => {
                     return (
-                        <div classname="friend">
-                            <p>{friend.name}</p>
-                            <p>{friend.age}</p>
-                            <p>{friend.email}</p>
+                        <div className="friend">
+                            <h3>{friend.name}</h3>
+                            <p><span>Age:</span> {friend.age}</p>
+                            <p><span>Email:</span> {friend.email}</p>
                         </div>    
                     )
                 })}

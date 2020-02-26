@@ -8,6 +8,7 @@ function Login(props) {
         password: ''
     })
 
+    //handles login changes
     const handleChanges = e => {
           setLogin({
               ...login,

@@ -4,9 +4,10 @@ import axiosWithAuth from '../utils/axiosWithAuth'
 function FriendsList() {
     //friends array
     const [friends, setFriends] = useState([])
+    
     //data for new friends
     const [newFriends, setNewFriends] = useState({
-        id:'',
+        id: Date.now(),
         name: '',
         age: '',
         email: ''
@@ -38,14 +39,22 @@ useEffect(() => {
 const addFriend = e => {
     e.preventDefault()
     axiosWithAuth()
-    .post('/api/friends', setNewFriends)
+    .post('/api/friends', newFriends)
     .then(response => {
        console.log(response)
+       setFriends(response.data)
     })
     .catch(error => {
         console.log (error)
     })
+    setNewFriends({
+        name:'',
+        age:'',
+        email:''
+    })
 }
+
+
 
     
     return (
@@ -79,10 +88,10 @@ const addFriend = e => {
 
             <h2>Mis amigos</h2>
 
-            <div>
+            <div className="friends-div">
                 {friends.map(friend => {
                     return (
-                        <div>
+                        <div classname="friend">
                             <p>{friend.name}</p>
                             <p>{friend.age}</p>
                             <p>{friend.email}</p>
